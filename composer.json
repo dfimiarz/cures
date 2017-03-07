@@ -1,6 +1,6 @@
 {
-    "name": "ccny/ccny-c-u-r-e-s",
-    "description": "CCNY Cures Work Order System",
+    "name": "CURES",
+    "description": "Cures Work Order System",
     "authors": [
         {
             "name": "Daniel Fimiarz",
