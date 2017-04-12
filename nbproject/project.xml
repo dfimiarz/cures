@@ -5,6 +5,88 @@
         <data xmlns="http://www.netbeans.org/ns/php-project/1">
             <name>CURES</name>
         </data>
-        <libraries xmlns="http://www.netbeans.org/ns/cdnjs-libraries/1"/>
+        <libraries xmlns="http://www.netbeans.org/ns/cdnjs-libraries/1">
+            <library name="foundation" version="6.3.1">
+                <file localPath="web/resources/vendor/foundation/css/foundation-flex.css" path="css/foundation-flex.css"/>
+                <file localPath="web/resources/vendor/foundation/css/foundation-flex.min.css" path="css/foundation-flex.min.css"/>
+                <file localPath="web/resources/vendor/foundation/css/foundation-rtl.css" path="css/foundation-rtl.css"/>
+                <file localPath="web/resources/vendor/foundation/css/foundation-rtl.min.css" path="css/foundation-rtl.min.css"/>
+                <file localPath="web/resources/vendor/foundation/css/foundation.css" path="css/foundation.css"/>
+                <file localPath="web/resources/vendor/foundation/css/foundation.min.css" path="css/foundation.min.css"/>
+                <file localPath="web/resources/vendor/foundation/js/foundation.js" path="js/foundation.js"/>
+                <file localPath="web/resources/vendor/foundation/js/foundation.min.js" path="js/foundation.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.abide.js" path="js/plugins/foundation.abide.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.abide.min.js" path="js/plugins/foundation.abide.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.accordion.js" path="js/plugins/foundation.accordion.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.accordion.min.js" path="js/plugins/foundation.accordion.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.accordionMenu.js" path="js/plugins/foundation.accordionMenu.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.accordionMenu.min.js" path="js/plugins/foundation.accordionMenu.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.core.js" path="js/plugins/foundation.core.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.core.min.js" path="js/plugins/foundation.core.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.drilldown.js" path="js/plugins/foundation.drilldown.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.drilldown.min.js" path="js/plugins/foundation.drilldown.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.dropdown.js" path="js/plugins/foundation.dropdown.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.dropdown.min.js" path="js/plugins/foundation.dropdown.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.dropdownMenu.js" path="js/plugins/foundation.dropdownMenu.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.dropdownMenu.min.js" path="js/plugins/foundation.dropdownMenu.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.equalizer.js" path="js/plugins/foundation.equalizer.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.equalizer.min.js" path="js/plugins/foundation.equalizer.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.interchange.js" path="js/plugins/foundation.interchange.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.interchange.min.js" path="js/plugins/foundation.interchange.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.magellan.js" path="js/plugins/foundation.magellan.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.magellan.min.js" path="js/plugins/foundation.magellan.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.offcanvas.js" path="js/plugins/foundation.offcanvas.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.offcanvas.min.js" path="js/plugins/foundation.offcanvas.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.orbit.js" path="js/plugins/foundation.orbit.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.orbit.min.js" path="js/plugins/foundation.orbit.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.responsiveMenu.js" path="js/plugins/foundation.responsiveMenu.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.responsiveMenu.min.js" path="js/plugins/foundation.responsiveMenu.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.responsiveToggle.js" path="js/plugins/foundation.responsiveToggle.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.responsiveToggle.min.js" path="js/plugins/foundation.responsiveToggle.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.reveal.js" path="js/plugins/foundation.reveal.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.reveal.min.js" path="js/plugins/foundation.reveal.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.slider.js" path="js/plugins/foundation.slider.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.slider.min.js" path="js/plugins/foundation.slider.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.sticky.js" path="js/plugins/foundation.sticky.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.sticky.min.js" path="js/plugins/foundation.sticky.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.tabs.js" path="js/plugins/foundation.tabs.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.tabs.min.js" path="js/plugins/foundation.tabs.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.toggler.js" path="js/plugins/foundation.toggler.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.toggler.min.js" path="js/plugins/foundation.toggler.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.tooltip.js" path="js/plugins/foundation.tooltip.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.tooltip.min.js" path="js/plugins/foundation.tooltip.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.util.box.js" path="js/plugins/foundation.util.box.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.util.box.min.js" path="js/plugins/foundation.util.box.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.util.keyboard.js" path="js/plugins/foundation.util.keyboard.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.util.keyboard.min.js" path="js/plugins/foundation.util.keyboard.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.util.mediaQuery.js" path="js/plugins/foundation.util.mediaQuery.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.util.mediaQuery.min.js" path="js/plugins/foundation.util.mediaQuery.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.util.motion.js" path="js/plugins/foundation.util.motion.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.util.motion.min.js" path="js/plugins/foundation.util.motion.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.util.nest.js" path="js/plugins/foundation.util.nest.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.util.nest.min.js" path="js/plugins/foundation.util.nest.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.util.timerAndImageLoader.js" path="js/plugins/foundation.util.timerAndImageLoader.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.util.timerAndImageLoader.min.js" path="js/plugins/foundation.util.timerAndImageLoader.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.util.touch.js" path="js/plugins/foundation.util.touch.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.util.touch.min.js" path="js/plugins/foundation.util.touch.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.util.triggers.js" path="js/plugins/foundation.util.triggers.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.util.triggers.min.js" path="js/plugins/foundation.util.triggers.min.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.zf.responsiveAccordionTabs.js" path="js/plugins/foundation.zf.responsiveAccordionTabs.js"/>
+                <file localPath="web/resources/vendor/foundation/js/plugins/foundation.zf.responsiveAccordionTabs.min.js" path="js/plugins/foundation.zf.responsiveAccordionTabs.min.js"/>
+            </library>
+            <library name="jquery" version="3.2.1">
+                <file localPath="web/resources/vendor/jquery/core.js" path="core.js"/>
+                <file localPath="web/resources/vendor/jquery/jquery.js" path="jquery.js"/>
+                <file localPath="web/resources/vendor/jquery/jquery.min.js" path="jquery.min.js"/>
+                <file localPath="web/resources/vendor/jquery/jquery.min.map" path="jquery.min.map"/>
+                <file localPath="web/resources/vendor/jquery/jquery.slim.js" path="jquery.slim.js"/>
+                <file localPath="web/resources/vendor/jquery/jquery.slim.min.js" path="jquery.slim.min.js"/>
+                <file localPath="web/resources/vendor/jquery/jquery.slim.min.map" path="jquery.slim.min.map"/>
+            </library>
+            <library name="what-input" version="4.1.1">
+                <file localPath="web/resources/vendor/what-input/what-input.js" path="what-input.js"/>
+                <file localPath="web/resources/vendor/what-input/what-input.min.js" path="what-input.min.js"/>
+            </library>
+        </libraries>
     </configuration>
 </project>

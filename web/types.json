@@ -1,0 +1,20 @@
+[
+  {
+    "code": "1",
+    "category": "1",
+    "label": "Pipe leak",
+    "tokens": [
+      "Pipe",
+      "Leak"
+    ]
+  },
+   {
+    "code": "2",
+    "category": "1",
+    "label": "Broken Pipe",
+    "tokens": [
+      "Broken",
+      "Pipe"
+    ]
+  }
+]
