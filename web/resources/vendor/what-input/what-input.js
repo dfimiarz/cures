@@ -1,6 +1,6 @@
 /**
  * what-input - A global utility for tracking the current input method (mouse, keyboard or touch).
- * @version v4.1.1
+ * @version v4.3.1
  * @link https://github.com/ten1seven/what-input
  * @license MIT
  */
@@ -67,17 +67,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * variables
 	   */
 
-	  // cache document.documentElement
-	  var docElem = document.documentElement;
-
 	  // last used input type
 	  var currentInput = 'initial';
 
 	  // last used input intent
 	  var currentIntent = null;
 
+	  // cache document.documentElement
+	  var doc = document.documentElement;
+
 	  // form input types
 	  var formInputs = ['input', 'select', 'textarea'];
+
+	  var functionList = [];
 
 	  // list of modifier keys commonly used with the mouse and
 	  // can be safely ignored to prevent false keyboard detection
@@ -88,16 +90,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	  93 // Windows menu / right Apple cmd
 	  ];
 
+	  // list of keys for which we change intent even for form inputs
+	  var changeIntentMap = [9 // tab
+	  ];
+
 	  // mapping of events to input types
 	  var inputMap = {
-	    'keyup': 'keyboard',
-	    'mousedown': 'mouse',
-	    'mousemove': 'mouse',
-	    'MSPointerDown': 'pointer',
-	    'MSPointerMove': 'pointer',
-	    'pointerdown': 'pointer',
-	    'pointermove': 'pointer',
-	    'touchstart': 'touch'
+	    keydown: 'keyboard',
+	    keyup: 'keyboard',
+	    mousedown: 'mouse',
+	    mousemove: 'mouse',
+	    MSPointerDown: 'pointer',
+	    MSPointerMove: 'pointer',
+	    pointerdown: 'pointer',
+	    pointermove: 'pointer',
+	    touchstart: 'touch'
 	  };
 
 	  // array of all used input types
@@ -111,8 +118,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  // store current mouse position
 	  var mousePos = {
-	    'x': null,
-	    'y': null
+	    x: null,
+	    y: null
 	  };
 
 	  // map of IE 10 pointer events
@@ -121,6 +128,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    3: 'touch', // treat pen like touch
 	    4: 'mouse'
 	  };
+
+	  var supportsPassive = false;
+
+	  try {
+	    var opts = Object.defineProperty({}, 'passive', {
+	      get: function get() {
+	        supportsPassive = true;
+	      }
+	    });
+
+	    window.addEventListener('test', null, opts);
+	  } catch (e) {}
 
 	  /*
 	   * set up
@@ -142,32 +161,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // `pointermove`, `MSPointerMove`, `mousemove` and mouse wheel event binding
 	    // can only demonstrate potential, but not actual, interaction
 	    // and are treated separately
+	    var options = supportsPassive ? { passive: true } : false;
 
 	    // pointer events (mouse, pen, touch)
 	    if (window.PointerEvent) {
-	      docElem.addEventListener('pointerdown', updateInput);
-	      docElem.addEventListener('pointermove', setIntent);
+	      doc.addEventListener('pointerdown', updateInput);
+	      doc.addEventListener('pointermove', setIntent);
 	    } else if (window.MSPointerEvent) {
-	      docElem.addEventListener('MSPointerDown', updateInput);
-	      docElem.addEventListener('MSPointerMove', setIntent);
+	      doc.addEventListener('MSPointerDown', updateInput);
+	      doc.addEventListener('MSPointerMove', setIntent);
 	    } else {
 	      // mouse events
-	      docElem.addEventListener('mousedown', updateInput);
-	      docElem.addEventListener('mousemove', setIntent);
+	      doc.addEventListener('mousedown', updateInput);
+	      doc.addEventListener('mousemove', setIntent);
 
 	      // touch events
 	      if ('ontouchstart' in window) {
-	        docElem.addEventListener('touchstart', touchBuffer);
-	        docElem.addEventListener('touchend', touchBuffer);
+	        doc.addEventListener('touchstart', touchBuffer, options);
+	        doc.addEventListener('touchend', touchBuffer);
 	      }
 	    }
 
 	    // mouse wheel
-	    docElem.addEventListener(detectWheel(), setIntent);
+	    doc.addEventListener(detectWheel(), setIntent, options);
 
 	    // keyboard events
-	    docElem.addEventListener('keydown', updateInput);
-	    docElem.addEventListener('keyup', updateInput);
+	    doc.addEventListener('keydown', updateInput);
+	    doc.addEventListener('keyup', updateInput);
 	  };
 
 	  // checks conditions before updating new input
@@ -181,18 +201,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (currentInput !== value || currentIntent !== value) {
 	        var activeElem = document.activeElement;
 	        var activeInput = false;
+	        var notFormInput = activeElem && activeElem.nodeName && formInputs.indexOf(activeElem.nodeName.toLowerCase()) === -1;
 
-	        if (activeElem && activeElem.nodeName && formInputs.indexOf(activeElem.nodeName.toLowerCase()) === -1) {
+	        if (notFormInput || changeIntentMap.indexOf(eventKey) !== -1) {
 	          activeInput = true;
 	        }
 
 	        if (value === 'touch' ||
-
 	        // ignore mouse modifier keys
-	        value === 'mouse' && ignoreMap.indexOf(eventKey) === -1 ||
-
+	        value === 'mouse' ||
 	        // don't switch if the current element is a form input
-	        value === 'keyboard' && activeInput) {
+	        value === 'keyboard' && eventKey && activeInput && ignoreMap.indexOf(eventKey) === -1) {
 	          // set the current and catch-all variable
 	          currentInput = currentIntent = value;
 
@@ -204,13 +223,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  // updates the doc and `inputTypes` array with new input
 	  var setInput = function setInput() {
-	    docElem.setAttribute('data-whatinput', currentInput);
-	    docElem.setAttribute('data-whatintent', currentInput);
+	    doc.setAttribute('data-whatinput', currentInput);
+	    doc.setAttribute('data-whatintent', currentInput);
 
 	    if (inputTypes.indexOf(currentInput) === -1) {
 	      inputTypes.push(currentInput);
-	      docElem.className += ' whatinput-types-' + currentInput;
+	      doc.className += ' whatinput-types-' + currentInput;
 	    }
+
+	    fireFunctions('input');
 	  };
 
 	  // updates input intent for `mousemove` and `pointermove`
@@ -235,7 +256,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (currentIntent !== value) {
 	        currentIntent = value;
 
-	        docElem.setAttribute('data-whatintent', currentIntent);
+	        doc.setAttribute('data-whatintent', currentIntent);
+
+	        fireFunctions('intent');
 	      }
 	    }
 	  };
@@ -249,6 +272,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      updateInput(event);
 	    } else {
 	      isBuffering = true;
+	    }
+	  };
+
+	  var fireFunctions = function fireFunctions(type) {
+	    for (var i = 0, len = functionList.length; i < len; i++) {
+	      if (functionList[i].type === type) {
+	        functionList[i].fn.call(undefined, currentIntent);
+	      }
 	    }
 	  };
 
@@ -282,6 +313,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return wheelType;
 	  };
 
+	  var objPos = function objPos(match) {
+	    for (var i = 0, len = functionList.length; i < len; i++) {
+	      if (functionList[i].fn === match) {
+	        return i;
+	      }
+	    }
+	  };
+
 	  /*
 	   * init
 	   */
@@ -308,6 +347,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // returns array: all the detected input types
 	    types: function types() {
 	      return inputTypes;
+	    },
+
+	    // overwrites ignored keys with provided array
+	    ignoreKeys: function ignoreKeys(arr) {
+	      ignoreMap = arr;
+	    },
+
+	    // attach functions to input and intent "events"
+	    // funct: function to fire on change
+	    // eventType: 'input'|'intent'
+	    registerOnChange: function registerOnChange(fn, eventType) {
+	      functionList.push({
+	        fn: fn,
+	        type: eventType || 'input'
+	      });
+	    },
+
+	    unRegisterOnChange: function unRegisterOnChange(fn) {
+	      var position = objPos(fn);
+
+	      if (position) {
+	        functionList.splice(position, 1);
+	      }
 	    }
 	  };
 	}();
