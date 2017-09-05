@@ -13,26 +13,28 @@
 
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
             <div class="container">
-                <a href="index.html" class="navbar-brand">CCNY CRUES</a>
+                <a href="./" class="navbar-brand">CCNY CRUES</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav ml-auto">
-                        {% block menuItems %}
+                        {% block navMenu %}
                             <li>
-                                <a href="#home" class="nav-link">Home</a>
+                                <a href="./" class="nav-link">Home</a>
                             </li>
+                            {% block dynamicMenuContent %}
                             <li>
-                                <a href="#new" class="nav-link">New request</a>
+                                <a href="./workorder" class="nav-link">New Request</a>
+                            </li>
+                            {% endblock dynamicMenuContent %}
+                            <li>
+                                <a href="./status" class="nav-link">Status</a>
                             </li>
                             <li>
                                 <a href="#contact" class="nav-link">Contact</a>
                             </li>
-                            <li>
-                                <a href="#help" class="nav-link">About</a>
-                            </li>
-                        {% endblock %}
+                        {% endblock navMenu %}
                     </ul>
                 </div>
             </div>
