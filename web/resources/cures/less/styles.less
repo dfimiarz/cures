@@ -28,6 +28,7 @@ THE SOFTWARE.
 @bg-color: #333;
 @font-color: #fff;
 @primary-color: #008ed6;
+@dark-overlay: rgba(0,0,0,0.7);
 
 body{
     background-color: @bg-color;
@@ -37,4 +38,21 @@ body{
 .navbar{
     border-bottom: @primary-color 3px solid;
     opacity: 0.8;
+}
+
+.main-section{
+    padding-top: 100px;
+    background: 
+        linear-gradient(
+        rgba(0, 0, 0, 0.7), 
+        rgba(0, 0, 0, 0.7)
+        ),
+        url('../images/machinery.jpeg') no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+
+.main-inner{
+    padding-top: 100px;
 }

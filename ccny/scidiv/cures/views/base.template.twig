@@ -11,7 +11,6 @@
         {% endblock %}
     </head>
     <body id="home">
-
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
             <div class="container">
                 <a href="./" class="navbar-brand">CCNY CRUES</a>
@@ -40,11 +39,9 @@
                 </div>
             </div>
         </nav>
-
         {% block content %}
             <h1>Hello, world!</h1>
         {% endblock %}
-
         {% block javascript %}
             <script src="{{asset("resources/vendor/jquery/jquery.min.js")}}"></script>
             <script src="{{asset("resources/vendor/popper.js/popper.min.js")}}"></script>

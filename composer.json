@@ -18,5 +18,8 @@
         "psr-4": {
             "ccny\\scidiv\\cures\\": "ccny/scidiv/cures"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "6.3.x-dev"
     }
 }

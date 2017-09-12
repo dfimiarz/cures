@@ -33,4 +33,13 @@ body {
   border-bottom: #008ed6 3px solid;
   opacity: 0.8;
 }
+.main-section {
+  padding-top: 100px;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/machinery.jpeg') no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.main-inner {
+  padding-top: 100px;
+}
 /*# sourceMappingURL=styles.css.map */
