@@ -13,6 +13,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 $app->register(new Silex\Provider\AssetServiceProvider(), array());
 
 $app->get("/","ccny\scidiv\cures\ctrl\HomeController::indexAction")->bind("home");
-$app->get("/workorder","ccny\scidiv\cures\ctrl\WorkOrderController::newWorkOrder")->bind("new_workorder");
+$app->get("/workorder","ccny\scidiv\cures\ctrl\WorkOrderController::newWorkOrder")->bind("newWorkOrder");
+$app->post("/workorder","ccny\scidiv\cures\ctrl\WorkOrderController::processWorkOrder")->bind("processWorkOrder");
 
 $app->run();

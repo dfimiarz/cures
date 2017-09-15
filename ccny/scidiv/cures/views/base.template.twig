@@ -21,11 +21,11 @@
                     <ul class="navbar-nav ml-auto">
                         {% block navMenu %}
                             <li>
-                                <a href="./" class="nav-link">Home</a>
+                                <a href="{{ path('home')}}" class="nav-link">Home</a>
                             </li>
                             {% block dynamicMenuContent %}
                             <li>
-                                <a href="./workorder" class="nav-link">New Request</a>
+                                <a href="{{ path('newWorkOrder') }}" class="nav-link">New Request</a>
                             </li>
                             {% endblock dynamicMenuContent %}
                             <li>

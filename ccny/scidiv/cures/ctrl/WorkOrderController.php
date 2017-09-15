@@ -40,4 +40,8 @@ class WorkOrderController {
         return $app['twig']->render("newworkorder.html.twig",array());
     }
     
+    public function processWorkOrder(Request $request, Application $app){
+        
+    }
+    
 }
