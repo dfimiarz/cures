@@ -25,6 +25,10 @@ THE SOFTWARE.
     Created on : Sep 8, 2017, 9:17:42 AM
     Author     : Daniel Fimiarz <dfimiarz@ccny.cuny.edu>
 */
+canvas {
+  border: solid 1px blue;
+  width: 100%;
+}
 body {
   background-color: #565a5c;
   color: #fff;

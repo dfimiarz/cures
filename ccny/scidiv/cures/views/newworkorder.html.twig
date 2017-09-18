@@ -16,21 +16,49 @@
     <section class="main-section">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 col-lg-6 mx-auto">
+                <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                     <h2 class="display-4 py-4 text-center"><strong>New request</strong></h2>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 col-lg-6 mx-auto">
+                <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                     <div class="alert alert-info">
                         <h6 text-center">Emergancy? Call (555) 555-5555 immediately</h6>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span>Submissions</span>
+                                <span>Satisfaction</span>
+                                <span>Feedback</span>
+                                <canvas class="img-fluid"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <form novalidate>
                 <div class="form-group row">
-                    <div class="col-md-6 col-sm-12 mx-auto">
-                        <label for="req_name_input" class="col-form-label"> Your name:</label>
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">    
+                        <label for="prob_type_input">Request type:</label>
+                        <div class="autocomplete_jq">
+                            <input type="text" placeholder="e.g Leak" id="problem_type_input" class="form-control" style="margin-bottom: 2px;">
+                        </div>
+                        {#<div style="font-size:x-small;margin-bottom: 5px; font-weight: bold;">
+                            <span>Last 30 days:</span>
+                            <span>Report count: 23</span>
+                            <span>Satisfaction: 80%</span>
+                            <a href=""><span> more ...</span></a>
+                        </div>#}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+                        <label for="req_name_input"> Your name:</label>
                         <input class="form-control" id="req_name_input" name="requester" type="text">
                         <div class="invalid-feedback">
                             Invalid name
@@ -39,7 +67,7 @@
 
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-6 col-sm-12 mx-auto">
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <label for="req_phone_input"> Phone #:  </label>
                         <input class="form-control" id="req_phone_input" name="phone" type="text">
                         <div class="invalid-feedback">
@@ -48,7 +76,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-6 col-sm-12 mx-auto">
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <label for="req_email_input"> E-mail address:  </label>
                         <input class="form-control" id="req_email_input" name="email" type="email">
                         <div class="invalid-feedback">
@@ -57,7 +85,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-6 col-sm-12 mx-auto">
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <label for="req_dept_sel"> Department:  </label>    
                         <select class="form-control" id="req_dept_sel" name="dept">
                             <option value="biology">Biology</option>
@@ -72,23 +100,9 @@
                         </div>
                     </div>
 
-                </div>
+                </div>      
                 <div class="form-group row">
-                    <div class="col-md-6 col-sm-12 mx-auto">    
-                        <label for="prob_type_input">Request type:</label>
-                        <div class="autocomplete_jq">
-                            <input type="text" placeholder="e.g Leak" id="problem_type_input" class="form-control" style="margin-bottom: 2px;">
-                        </div>
-                        <div style="font-size:x-small;margin-bottom: 5px; font-weight: bold;">
-                            <span>Last 30 days:</span>
-                            <span>Report count: 23</span>
-                            <span>Satisfaction: 80%</span>
-                            <a href=""><span> more ...</span></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-6 col-sm-12 mx-auto">     
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">     
                         <label for="prob_loc_input">Location:</label>
                         <div class="autocomplete_jq">
                             <input type="text" placeholder="Ex. MR 1320" id="problem_loc_input" class="form-control">
@@ -97,7 +111,7 @@
 
                 </div>
                 <div class="form-check row">
-                    <div class="col-md-6 col-sm-12 mx-auto">
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="urgent">
@@ -107,26 +121,26 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-6 col-sm-12 mx-auto">
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <label>Detailed description:</label>
                         <textarea rows="4" class="form-control"></textarea>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-6 col-sm-12 mx-auto">
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <label>Additional instructions:</label>
                         <textarea rows="4" class="form-control" placeholder='None'></textarea>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-md-6 col-sm-12 mx-auto">
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <label for="wo_image" class="button">Attach an image (optional)</label>
                         <input class="form-control-file" type="file" id="wo_image" class="show-for-sr">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-6 col-sm-12 mx-auto">
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <button type="button" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
