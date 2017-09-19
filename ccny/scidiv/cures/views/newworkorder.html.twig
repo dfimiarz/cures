@@ -7,6 +7,14 @@
 {% block styles %}
     {{parent()}}
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <style>
+        #detailed-stats-pannel{
+            display: none;
+        };
+
+    </style>
+
 {% endblock %}
 
 {% block dynamicMenuContent %}
@@ -23,21 +31,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                     <div class="alert alert-info">
-                        <h6 text-center">Emergancy? Call (555) 555-5555 immediately</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <span>Submissions</span>
-                                <span>Satisfaction</span>
-                                <span>Feedback</span>
-                                <canvas class="img-fluid"></canvas>
-                            </div>
-                        </div>
+                        <h6 text-center">Emergancy? You must Call (555) 555-5555 immediately</h6>
                     </div>
                 </div>
             </div>
@@ -48,12 +42,9 @@
                         <div class="autocomplete_jq">
                             <input type="text" placeholder="e.g Leak" id="problem_type_input" class="form-control" style="margin-bottom: 2px;">
                         </div>
-                        {#<div style="font-size:x-small;margin-bottom: 5px; font-weight: bold;">
-                            <span>Last 30 days:</span>
-                            <span>Report count: 23</span>
-                            <span>Satisfaction: 80%</span>
-                            <a href=""><span> more ...</span></a>
-                        </div>#}
+                        <div id="stats-main-container" class="small">
+                            Recent activity: Request count:<span> 5</span>, Satisfaction: <span> 50% </span> <a href="./statistics"> see more </a>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -155,61 +146,23 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
 
+        var work_request = {
+            type: "",
+            requester: "",
+            phone: "",
+            email: "",
+            dept_id: "",
+            location: "",
+            urgent: 0,
+            desc: "",
+            inst: ""
+            
+        }
 
         var rTypes = ["Cleaning", "Mopping", "Sweeping", "Keys", "Broken pipe", "Radiator leak", "Too cold", "Too warm", "Mice"];
 
         $(document).ready(function () {
-            /*
-             (function(jq){
-             
-             var isFilled = false;
-             
-             function initAutocomplete(){
-             clearDialog();
-             for( var i = 0; i < rTypes.length; i++ ){
-             $('.suggest_opt').append('<div>' + rTypes[i] + '</div>');
-             }
-             }
-             
-             function clearDialog(){
-             console.log("Clearing suggestions");
-             $('.suggest_opt').empty();       
-             }
-             
-             $('.autocomplete input').click(function(){
-             if( ! isFilled ){
-             $('.suggest_opt').addClass('open');
-             }
-             });
-             
-             $(document).on('click','.suggest_opt > div',function(e){
-             $('.autocomplete input').val($(this).text()).focus();
-             $('.autocomplete #clearBtn').addClass("visible");
-             
-             isFilled = true;
-             });
-             
-             $(".autocomplete #clearBtn").click(function(e){
-             isFilled = false;
-             $('.suggest_opt').addClass('open');
-             $('.autocomplete input').val("").focus();
-             $(this).removeClass("visible");
-             });
-             
-             $(".autocomplete #prob_type").on('input',function(){
-             $('.suggest_opt').addClass('open');
-             isFilled = false;
-             });
-             
-             $('body').on('click',function(e){
-             if( ! $(e.target).is("#prob_type, #clearBtn")){
-             $(".suggest_opt").removeClass("open");
-             }
-             });
-             
-             initAutocomplete();
-             })(jQuery);
-             */
+  
             $(function ()
             {
                 var rTypes = [
@@ -247,17 +200,27 @@
                     "CDI 13101"
                 ];
 
+
+
                 $("#problem_type_input").autocomplete(
                         {source: rTypes}
                 );
 
 
                 $("#problem_loc_input").autocomplete(
-                        {source: locations}
+                        {
+                            source: "/api/location",
+                            minLength: 2,
+                            select: function(event, ui ){
+                                alert( "Selected: " + ui.item.label );
+                            }
+                        }
                 );
-
-            }
-            );
+            });
+            
+            $("#show-more-stats-btn").click(function () {
+                    alert("Will show more");
+            });
         });
 
     </script>
