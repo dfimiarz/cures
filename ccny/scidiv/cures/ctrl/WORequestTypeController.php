@@ -34,14 +34,26 @@ use Symfony\Component\HttpFoundation\Request as Request;
  *
  * @author Daniel Fimiarz <dfimiarz@ccny.cuny.edu>
  */
-class WorkOrderController {
+class WORequestTypeController {
    
-    public function newWorkOrder(Request $request, Application $app){
-        return $app['twig']->render("newworkorder.html.twig",array());
-    }
-    
-    public function submitWorkOrder(Request $request, Application $app){
-        return $app->json("ok");
+    public function getTypes(Request $request, Application $app){
+        
+        $reqTypes = ["Cleaning","Lights","Leaking radiator",
+                    "Leaking pipe","Leak","Faucet","Toilet paper",
+                    "Shades","Lock","Windows","Sink"
+                    ];
+        
+        $term = $request->get('term');
+        
+        $callback =
+            function ($probType) use ($term)
+            {
+                return stripos($probType, $term) !== FALSE;
+            };
+        
+        $result = array_filter($reqTypes, $callback);        
+        
+        return $app->json($result);
     }
     
 }

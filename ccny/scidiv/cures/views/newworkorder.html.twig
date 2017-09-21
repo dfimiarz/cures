@@ -31,26 +31,16 @@
             <div class="row">
                 <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                     <div class="alert alert-info">
-                        <h6 text-center">Emergancy? You must Call (555) 555-5555 immediately</h6>
+                        <h6 text-center">Emergancy? Call (555) 555-5555</h6>
                     </div>
                 </div>
             </div>
-            <form novalidate>
-                <div class="form-group row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">    
-                        <label for="prob_type_input">Request type:</label>
-                        <div class="autocomplete_jq">
-                            <input type="text" placeholder="e.g Leak" id="problem_type_input" class="form-control" style="margin-bottom: 2px;">
-                        </div>
-                        <div id="stats-main-container" class="small">
-                            Recent activity: Request count:<span> 5</span>, Satisfaction: <span> 50% </span> <a href="./statistics"> see more </a>
-                        </div>
-                    </div>
-                </div>
+            <form novalidate autocomplete="on" id="workorder_form">
+
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <label for="req_name_input"> Your name:</label>
-                        <input class="form-control" id="req_name_input" name="requester" type="text">
+                        <input class="form-control" id="req_name_input" autocomplete="name" name="name" type="text">
                         <div class="invalid-feedback">
                             Invalid name
                         </div>
@@ -60,7 +50,7 @@
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <label for="req_phone_input"> Phone #:  </label>
-                        <input class="form-control" id="req_phone_input" name="phone" type="text">
+                        <input class="form-control" id="req_phone_input" name="phone" type="phone">
                         <div class="invalid-feedback">
                             Invalid phone
                         </div>
@@ -91,7 +81,18 @@
                         </div>
                     </div>
 
-                </div>      
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">    
+                        <label for="prob_type_input">Request type:</label>
+                        <div class="autocomplete_jq">
+                            <input type="text" placeholder="e.g Leak" id="problem_type_input" class="form-control" style="margin-bottom: 2px;">
+                        </div>
+                        <div id="stats-main-container" class="small">
+                            Recent activity: Request count:<span> 5</span>, Satisfaction: <span> 50% </span> <a href="./statistics"> see more </a>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">     
                         <label for="prob_loc_input">Location:</label>
@@ -132,7 +133,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                        <button type="button" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-primary" id="submit_btn">Submit</button>
                     </div>
                 </div>
 
@@ -146,7 +147,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
 
-        var work_request = {
+        var workRequest = {
             type: "",
             requester: "",
             phone: "",
@@ -156,71 +157,55 @@
             urgent: 0,
             desc: "",
             inst: ""
-            
+
         }
 
-        var rTypes = ["Cleaning", "Mopping", "Sweeping", "Keys", "Broken pipe", "Radiator leak", "Too cold", "Too warm", "Mice"];
-
         $(document).ready(function () {
-  
-            $(function ()
-            {
-                var rTypes = [
-                    "Cleaning",
-                    "Mopping",
-                    "Sweeping",
-                    "Keys",
-                    "Broken pipe",
-                    "Radiator leak",
-                    "Too cold",
-                    "Too warm",
-                    "Too hot",
-                    "Mice",
-                    "Dust",
-                    "Water leak",
-                    "Lock",
-                    "Elevator",
-                    "Shades"
-                ];
-
-                var locations = [
-                    "MR 101",
-                    "MR 102",
-                    "MR 1301",
-                    "MR 234",
-                    "MR 1201",
-                    "MR 1001",
-                    "MR 1001A",
-                    "NAC 4/321",
-                    "MR 1328",
-                    "Campus grounds",
-                    "MR Male restroom",
-                    "MR Femmale Restroom",
-                    "Elevator",
-                    "CDI 13101"
-                ];
 
 
-
-                $("#problem_type_input").autocomplete(
-                        {source: rTypes}
-                );
-
-
-                $("#problem_loc_input").autocomplete(
-                        {
-                            source: "/api/location",
-                            minLength: 2,
-                            select: function(event, ui ){
-                                alert( "Selected: " + ui.item.label );
-                            }
+            $("#problem_type_input").autocomplete(
+                    {
+                        source: "{{ path('getRequestTypes') }}",
+                        minLength: 2,
+                        select: function (event, ui) {
+                            alert("Will get stats for " + ui.item.value);
                         }
-                );
+                    }
+            );
+
+
+            $("#problem_loc_input").autocomplete(
+                    {
+                        source: "{{ path('getLocations') }}",
+                        minLength: 2
+                    }
+            );
+
+           {# $("#submit_btn").click(function () {
+                alert("Ready to submit form");
+            });#}
+
+            $("#submit_btn").click(function (event) {
+                
+                event.preventDefault();
+                
+                var formdata = $('#workorder_form').serialize();
+                
+                $.ajax({
+                    url: '{{ path('addWorkOrder') }}',
+                    type: 'post',
+                    dataType: 'json',
+                    data: formdata,
+                    success: function (data) {
+                        alert(JSON.stringify(data));
+                    },
+                    error: function () {
+                        alert("Error submitting");
+                    }
+                });
+                
             });
-            
-            $("#show-more-stats-btn").click(function () {
-                    alert("Will show more");
-            });
+
         });
 
     </script>

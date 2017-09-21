@@ -34,13 +34,23 @@ use Symfony\Component\HttpFoundation\Request as Request;
  *
  * @author Daniel Fimiarz <dfimiarz@ccny.cuny.edu>
  */
-class ApiLocationController {
+class WOLocationController {
    
-    public function listLocations(Request $request, Application $app){
+    public function getLocations(Request $request, Application $app){
         
         $locations = ["MR 101","MR 1101","MR 1201","MR 1301","MR 1001"];
         
-        return $app->json($locations);
+        $term = $request->get('term');
+        
+        $callback =
+            function ($location) use ($term)
+            {
+                return stripos($location, $term) !== FALSE;
+            };
+        
+        $result = array_filter($locations, $callback);
+        
+        return $app->json($result);
     }
     
 }
