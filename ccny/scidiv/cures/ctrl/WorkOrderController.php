@@ -28,6 +28,7 @@ namespace ccny\scidiv\cures\ctrl;
 
 use Silex\Application as Application;
 use Symfony\Component\HttpFoundation\Request as Request;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Description of HomeController
@@ -41,7 +42,19 @@ class WorkOrderController {
     }
     
     public function submitWorkOrder(Request $request, Application $app){
-        return $app->json("ok");
+        
+        
+        /* @var $file UploadedFile */
+        $file = $request->files->get("imgfile");
+        
+        //When submission is ok, redirect to done
+        return $app->redirect("/confirm");
+        
+    }
+    
+    public function confirmWorkOrder(Request $request, Application $app){
+    
+        return "Confirmed";
     }
     
 }

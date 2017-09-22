@@ -17,5 +17,6 @@ $app->get("/workorder","ccny\scidiv\cures\ctrl\WorkOrderController::newWorkOrder
 $app->post("/workorder","ccny\scidiv\cures\ctrl\WorkOrderController::submitWorkOrder")->bind("addWorkOrder");
 $app->get("/api/location","ccny\scidiv\cures\ctrl\WOLocationController::getLocations")->bind("getLocations");
 $app->get("/api/reqtype","ccny\scidiv\cures\ctrl\WORequestTypeController::getTypes")->bind("getRequestTypes");
+$app->get("/confirm","ccny\scidiv\cures\ctrl\WorkOrderController::confirmWorkOrder")->bind("confirmWorkOrder");
 
 $app->run();
