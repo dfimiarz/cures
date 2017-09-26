@@ -29,6 +29,7 @@ namespace ccny\scidiv\cures\ctrl;
 use Silex\Application as Application;
 use Symfony\Component\HttpFoundation\Request as Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Session\Session as Session;
 
 /**
  * Description of HomeController
@@ -47,6 +48,18 @@ class WorkOrderController {
         /* @var $file UploadedFile */
         $file = $request->files->get("imgfile");
         
+        $name = $request->get("name",null);
+        $email = $request->get("email",null);
+        $phone = $request->get("phone",null);
+        $department = $request->get("dept",null);
+        $reme = $request->get("reme",0);
+        
+        /* @var $session Session */
+        $session = $app['session'];
+        
+        $session->getFlashBag()->add('user',$name);
+        $session->getFlashBag()->add('user',$email);
+        
         //When submission is ok, redirect to done
         return $app->redirect("/confirm");
         
@@ -54,7 +67,15 @@ class WorkOrderController {
     
     public function confirmWorkOrder(Request $request, Application $app){
     
-        return "Confirmed";
+        $bag = $app['session']->getFlashBag()->get('user');
+        
+        $result = "";
+        
+        foreach ($bag as $key => $value) {
+            $result .= $key . " " . $value;
+        }
+        
+        return $result;
     }
     
 }

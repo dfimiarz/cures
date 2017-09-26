@@ -25,7 +25,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                    <h2 class="display-4 py-4 text-center"><strong>New request</strong></h2>
+                    <h3 class="display-4 py-4 text-center"><strong>New request</strong></h3>
                 </div>
             </div>
             <div class="row">
@@ -37,15 +37,76 @@
             </div>
             <form autocomplete="on" id="reqform" method="post" action="{{ path("newWorkOrder")}} " enctype="multipart/form-data">
 
+
+                <div class="form-group row">
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">    
+                        <label for="prob_type_input">Request type:</label>
+                        <div class="autocomplete_jq">
+                            <input name="problemtype" type="text" name placeholder="e.g Leak" id="req_type_input" class="form-control" required>
+                        </div>
+                        {#<div id="stats-main-container" class="small">
+                            Recent activity: Request count:<span> 5</span>, Satisfaction: <span> 50% </span> <a href="./statistics"> see more </a>
+                        </div>#}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">     
+                        <label for="prob_loc_input">Location:</label>
+                        <div class="autocomplete_jq">
+                            <input type="text" placeholder="Ex. MR 1320" id="req_loc_input" class="form-control" name="location" required>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-check row">
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" name="urgent">
+                                Urgent request. Explain below
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+                        <label>Details:</label>
+                        <textarea rows="4" class="form-control" name="descr" required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+                        <label for="wo_image" class="button">Attach an image (optional)</label>
+                        <input class="form-control-file" type="file" id="req_image" class="show-for-sr" name="imgfile">
+                    </div>
+                </div>
+
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <label for="req_name_input"> Your name:</label>
-                        <input class="form-control" id="req_name_input" autocomplete="name" name="name" type="text" required>
+                        <input class="form-control " id="req_name_input" autocomplete="name" name="name" type="text" required>
                         <div class="invalid-feedback">
                             Invalid name
                         </div>
                     </div>
 
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+                        <label for="req_dept_sel"> Department:  </label>    
+                        <select class="form-control custom-select " id="req_dept_sel" name="dept" required>
+                            <option value="biology">Biology</option>
+                            <option value="chemistry">Chemistry</option>
+                            <option value="eas">EAS</option>
+                            <option value="mathematics">Mathematics</option>
+                            <option value="physics">Physics</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Invalid department
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
@@ -65,72 +126,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                        <label for="req_dept_sel"> Department:  </label>    
-                        <select class="form-control" id="req_dept_sel" name="dept" required>
-                            <option value="biology">Biology</option>
-                            <option value="chemistry">Chemistry</option>
-                            <option value="eas">EAS</option>
-                            <option value="mathematics">Mathematics</option>
-                            <option value="physics">Physics</option>
-                            <option value="other">Other</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Invalid department
-                        </div>
-                    </div>
-
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">    
-                        <label for="prob_type_input">Request type:</label>
-                        <div class="autocomplete_jq">
-                            <input name="problemtype" type="text" name placeholder="e.g Leak" id="req_type_input" class="form-control" required>
-                        </div>
-                        <div id="stats-main-container" class="small">
-                            Recent activity: Request count:<span> 5</span>, Satisfaction: <span> 50% </span> <a href="./statistics"> see more </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">     
-                        <label for="prob_loc_input">Location:</label>
-                        <div class="autocomplete_jq">
-                            <input type="text" placeholder="Ex. MR 1320" id="req_loc_input" class="form-control" name="location" required>
-                        </div>
-                    </div>
-
-                </div>
                 <div class="form-check row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <div class="form-check">
                             <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="urgent">
-                                Urgent request.<small class="text-muted"> Explain in details below</small>
+                                <input type="checkbox" class="form-check-input" name="reme">
+                                Remember me
                             </label>
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                        <label>Detailed description:</label>
-                        <textarea rows="4" class="form-control" name="descr" required></textarea>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                        <label>Additional instructions:</label>
-                        <textarea rows="4" class="form-control" name="inst" placeholder='None'></textarea>
-                    </div>
-                </div>
 
-                <div class="form-group row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                        <label for="wo_image" class="button">Attach an image (optional)</label>
-                        <input class="form-control-file" type="file" id="req_image" class="show-for-sr" name="imgfile">
-                    </div>
-                </div>
+
+
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <button type="submit" class="btn btn-primary" id="submit_btn">Submit</button>
@@ -193,33 +201,33 @@
 
             });
 
-           {# $("#submit_btn").click(function (event) {
+        {# $("#submit_btn").click(function (event) {
 
 
 
 
 
-                var formdata = $('#workorder_form').serialize();
+             var formdata = $('#workorder_form').serialize();
 
-                $.ajax({
-                    url: '{{ path('addWorkOrder') }}',
-                    type: 'post',
-                    dataType: 'json',
-                    data: formdata,
-                    success: function (data) {
-                        alert("Server says: " + JSON.stringify(data));
-                    },
-                    error: function () {
-                        alert("Error submitting");
-                    }
-                });
-
-
+             $.ajax({
+                 url: '{{ path('addWorkOrder') }}',
+                 type: 'post',
+                 dataType: 'json',
+                 data: formdata,
+                 success: function (data) {
+                     alert("Server says: " + JSON.stringify(data));
+                 },
+                 error: function () {
+                     alert("Error submitting");
+                 }
+             });
 
 
-            });#}
 
-        });
+
+         });#}
+
+             });
 
     </script>
 {% endblock %} 
