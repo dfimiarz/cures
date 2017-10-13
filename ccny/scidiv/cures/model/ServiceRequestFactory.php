@@ -49,7 +49,7 @@ class ServiceRequestFactory {
         $servRequest->location = $http_req->get("location",null);
         $servRequest->urgent = $http_req->get("urgent",null);
         $servRequest->details = $http_req->get("details",null);
-        $servRequest->file_path = $http_req->files->get("imgfile");
+        $servRequest->file = $http_req->files->get("imgfile");
         
         $servRequest->name = $http_req->get("name",null);
         $servRequest->department = $http_req->get("dept",null);

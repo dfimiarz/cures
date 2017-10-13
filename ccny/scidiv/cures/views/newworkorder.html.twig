@@ -1,5 +1,7 @@
 {% extends "base.template.twig" %}
 
+{% import "form_elements.html.twig" as form_elements %}
+
 {% block title %}
     CURES - Submitt a work order
 {% endblock %}
@@ -28,6 +30,7 @@
                     <h3 class="display-4 py-4 text-center"><strong>New request</strong></h3>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                     <div class="alert alert-info">
@@ -35,18 +38,39 @@
                     </div>
                 </div>
             </div>
+            {% if form_errors is defined %}
+                <div class="row">
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+                        <div class="alert alert-danger">
+                            <h6 class="text-center">Error submitting request</h6>
+                        </div>
+                    </div>
+                </div> 
+            {% endif %}
             <form autocomplete="on" id="reqform" method="post" action="{{ path("newWorkOrder")}} " enctype="multipart/form-data">
 
 
                 <div class="form-group row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">    
-                        <label for="prob_type_input">Request type:</label>
+                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <div class="autocomplete_jq">
-                            <input name="type" type="text" placeholder="e.g Leak" id="req_type_input" class="form-control" required>
+
+                            {% set fieldId = "prob_type_input" %}
+                            {% set fieldLbl = "Request type:" %}
+                            {% set has_errors = false %}
+                            {% set errors = [] %}
+                            
+                            {% if form_errors.name is defined %}
+                                {% set has_error = true %}
+                                {% set errors = form_errors.name %}
+                            {% endif %}   
+
+                            {{ form_elements.fieldLabel(fieldLbl,fieldId)}}
+                            
+                            {{ form_elements.input('type','',has_errors,'e.g Leak',fieldId) }}
+
+                            {{ form_elements.showError(errors)}}
+
                         </div>
-                        {#<div id="stats-main-container" class="small">
-                            Recent activity: Request count:<span> 5</span>, Satisfaction: <span> 50% </span> <a href="./statistics"> see more </a>
-                        </div>#}
                     </div>
                 </div>
                 <div class="form-group row">
@@ -85,17 +109,17 @@
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <label for="req_name_input"> Your name:</label>
-                        <input class="form-control " id="req_name_input" autocomplete="name" name="name" type="text" required>
+                        <input class="form-control" id="req_name_input" name="name" type="text" required>
                         {% if form_errors.name is defined %}
                             {% for msg in form_errors.name %}
-                                <div>
+                                <div class="alert alert-danger" role="alert">
                                     {{ msg }}
                                 </div>
                             {% endfor %}
                         {% endif %}
                     </div>
                 </div>
-                    
+
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <label for="req_dept_sel"> Department:  </label>    
@@ -124,10 +148,14 @@
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <label for="req_email_input"> E-mail address:  </label>
-                        <input class="form-control" id="req_email_input" name="email" type="email" required>
-                        <div class="invalid-feedback">
-                            Invalid e-mail
-                        </div>
+                        <input class="form-control is-invalid" id="req_email_input" name="email" type="email" required>
+                        {% if form_errors.email is defined %}
+                            {% for msg in form_errors.email %}
+                                <div class="invalid-feedback">
+                                    {{ msg }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
                 <div class="form-check row">
@@ -171,12 +199,12 @@
             desc: "",
             inst: ""
 
-        }
+        };
 
         $(document).ready(function () {
 
 
-            $("#req_type_input").autocomplete(
+            $("#prob_type_input").autocomplete(
                     {
                         source: "{{ path('getRequestTypes') }}",
                         minLength: 2,
@@ -197,11 +225,15 @@
 
             $('#reqform').submit(function (event) {
 
+                console.log("Will submit");
+
                 var form = document.getElementById("reqform");
 
                 if (form.checkValidity() == false) {
                     event.preventDefault();
                 }
+
+
 
             });
 

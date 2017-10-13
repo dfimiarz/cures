@@ -40,7 +40,7 @@ class ServiceRequest {
     public $location;
     public $urgent;
     public $details;
-    public $file_path;
+    public $file;
     public $name;
     public $department;
     public $phone;

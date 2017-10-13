@@ -1,0 +1,33 @@
+{# empty Twig template #}
+{% macro input(name, value, has_errors, placeholder, id, required ) %}
+    {% set class="form-control" %}
+
+    {% if has_errors == true %}
+        {% set class = class ~ " is-invalid" %}
+    {% endif %}
+
+    <input type="text" placeholder="{{ placeholder|e }}" name="{{ name }}" value="{{ value|e }}" class="{{ class|e }}" id="{{ id|e }}" {{ required|default('required') }} />
+
+{% endmacro %}
+
+{% macro showError(errors) %}
+
+    {%if errors is not empty %}
+        {% if errors is iterable %}
+            {% for msg in errors %}
+                <div class="invalid-feedback">
+                    {{ msg }}
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="invalid-feedback">
+                {{ errors }}
+            </div>    
+        {% endif %}
+    {%endif %}
+
+{% endmacro %}
+
+{% macro fieldLabel(msg, target) %}
+    <label for="{{ target|e}}"> {{msg|e}} </label>
+{% endmacro %}

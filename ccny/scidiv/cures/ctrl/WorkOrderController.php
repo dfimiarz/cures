@@ -46,25 +46,16 @@ class WorkOrderController {
 
     public function newWorkOrder(Request $request, Application $app) {
 
-//        $form_params = array("form_errors" =>
-//            array(
-//                "phone" =>
-//                array("Name too short", "Name is empty"),
-//                "email" =>
-//                array("Name too short", "Name is empty"),
-//                "name" =>
-//                array("Name too short", "Name is empty")
-//        ));
-        $errorMsgs = $app['session']->getFlashBag()->get('formErrors');
+        $pagevars = [];
+        
+        /* @var $validationErrors[] */
+        $validationErrors = $app['session']->getFlashBag()->get('formErrors');
 
-        if( count($errorMsgs) > 0 ){
-            var_dump($errorMsgs);
-            exit();
+        if(count($validationErrors) > 0 ){
+            $pagevars["form_errors"] = $validationErrors[0];
         }
         
-        $formParams = ["form_errors" => $errorMsgs];
-        
-        return $app['twig']->render("newworkorder.html.twig", $formParams);
+        return $app['twig']->render("newworkorder.html.twig", $pagevars);
     }
 
     public function submitWorkOrder(Request $request, Application $app) {
@@ -77,23 +68,26 @@ class WorkOrderController {
         /* @var $validationErrors ConstraintViolationList */
         $validationErrors = $app['validator']->validate($servicerequest);
 
-        $errorMsgs = [];
-        
         if (count($validationErrors) > 0) {
 
+            $errors = [];
+            
             /* @var $validationError ConstraintViolationInterface */
             foreach ($validationErrors as $validationError) {
                 
-                $fieldname = $validationError->getPropertyPath();
+                $field = $validationError->getPropertyPath();
+                $msg = $validationError->getMessage();
                 
-                if (!array_key_exists($fieldname, $errorMsgs)){
-                    $errorMsgs[$fieldname] = [];
+                if( !array_key_exists($field, $errors)){
+                    $errors[$field] = [];
                 }
                 
-                $errorMsgs[$fieldname][] = $validationError->getMessage();
+                $errors[$field][] = $msg;
+                
             }
             
-            $session->getFlashBag()->add('formErrors', $errorMsgs);
+            
+            $session->getFlashBag()->add("formErrors", $errors );
 
             return $app->redirect($app['url_generator']->generate("newWorkOrder"));
         }
