@@ -8,12 +8,12 @@
         }
     ],
     "require": {
-        "silex/silex": "v2.0.4",
-        "twig/twig": "v2.4.3",
-        "symfony/twig-bridge": "v3.3.9",
-        "symfony/yaml": "v3.3.9",
-        "symfony/asset": "v3.3.9",
-        "symfony/validator": "v3.3.9"
+        "silex/silex": "v2.2.0",
+        "twig/twig": "v2.4.4",
+        "symfony/twig-bridge": "v3.3.10",
+        "symfony/yaml": "v3.3.10",
+        "symfony/asset": "v3.3.10",
+        "symfony/validator": "v3.3.10"
     },
     "autoload": {
         "psr-4": {

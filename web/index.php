@@ -1,8 +1,8 @@
 <?php
 
-include __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
-$app = new \Silex\Application();
+$app = new Silex\Application();
 
 $app['debug'] = true;
 
