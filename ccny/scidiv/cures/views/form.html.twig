@@ -1,0 +1,82 @@
+{% macro textInput(type,name, value, placeholder, id, required, hasErrors ) %}
+    {% set class="form-control" %}
+
+    {% if hasErrors == true %}
+        {% set class = class ~ " is-invalid" %}
+    {% endif %}
+
+    <input type="{{ type }}" placeholder="{{ placeholder }}" name="{{ name }}" value="{{ value|e }}" class="{{ class }}" id="{{ id }}" {{ required|default('') }} />
+
+{% endmacro %}
+
+{% macro textAreaInput(name, value, rows, placeholder, id, required, hasErrors ) %}
+    {% set class="form-control" %}
+
+    {% if hasErrors == true %}
+        {% set class = class ~ " is-invalid" %}
+    {% endif %}
+
+    <textarea rows="{{ rows|default("4") }}" placeholder="{{ placeholder }}" name="{{ name }}" value="{{ value|e }}" class="{{ class }}" id="{{ id }}" {{ required|default('') }} />
+
+{% endmacro %}
+
+{% macro showError(errors) %}
+
+    {%if errors is not empty %}
+        {% if errors is iterable %}
+            {% for msg in errors %}
+                <div class="invalid-feedback">
+                    {{ msg }}
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="invalid-feedback">
+                {{ errors }}
+            </div>    
+        {% endif %}
+    {%endif %}
+
+{% endmacro %}
+
+{% macro fieldLabel(msg, target) %}
+    <label for="{{ target }}"> {{ msg }} </label>
+{% endmacro %}
+
+
+{% macro field(attribs, context) %}
+
+    {% import _self as forms %}
+    {#--- BEGIN: Initilaize attributes ---#}
+    {% set errors = [] %}
+    {% set name = attribs.name|default('') %}
+    {% set type = attribs.type|default('input') %}
+    {% set subtype = attribs.subtype|default('text') %}
+    {% set lbl = attribs.lbl|default('') %}
+    {% set id = attribs.id|default(name ~ "_field_widget") %}
+    {% set value = attribs.value|default('') %}
+    {% set placeholder = attribs.placeholder|default('') %}
+    {% set required = attribs.required|default('') %}
+    {% set hasErrors = false %}
+
+    {% if attribute(context.formcontent.errors, name) is defined %}
+        {% set errors = attribute(context.formcontent.errors, name) %}
+        {% set hasErrors = true %}
+    {% endif %}
+
+    {% if attribute(context.formcontent.values, name) is defined %}
+        {% set value = attribute(context.formcontent.values, name) %}
+    {% endif %}
+    {#--- END: Initialize attributes ---#}
+
+    {{ forms.fieldLabel(lbl,id)}}
+
+    {% if type == 'input' %}
+        {{ forms.textInput(subtype, name, value, placeholder, id, required, hasErrors) }}
+    {% elseif type == 'textarea' %}
+        {{ forms.textAreaInput(name, value, 4 , placeholder, id, required, hasErrors) }}
+    {% endif %}
+    
+    {{ forms.showError(errors)}}
+
+{% endmacro %}
+

@@ -47,14 +47,14 @@ class WorkOrderController {
     public function newWorkOrder(Request $request, Application $app) {
 
         $pagevars = [];
-        
-        /* @var $validationErrors[] */
-        $validationErrors = $app['session']->getFlashBag()->get('formErrors');
 
-        if(count($validationErrors) > 0 ){
-            $pagevars["form_errors"] = $validationErrors[0];
+        /* @var $validationErrors[] */
+        $invReqDetails = $app['session']->getFlashBag()->get('formcontent');
+
+        if( isset($invReqDetails[0])){
+            $pagevars['formcontent'] = $invReqDetails[0];
         }
-        
+
         return $app['twig']->render("newworkorder.html.twig", $pagevars);
     }
 
@@ -71,23 +71,25 @@ class WorkOrderController {
         if (count($validationErrors) > 0) {
 
             $errors = [];
-            
+
             /* @var $validationError ConstraintViolationInterface */
             foreach ($validationErrors as $validationError) {
-                
+
                 $field = $validationError->getPropertyPath();
                 $msg = $validationError->getMessage();
-                
-                if( !array_key_exists($field, $errors)){
+
+                if (!array_key_exists($field, $errors)) {
                     $errors[$field] = [];
                 }
-                
+
                 $errors[$field][] = $msg;
-                
             }
-            
-            
-            $session->getFlashBag()->add("formErrors", $errors );
+
+            $invReqDetails = array("errors" => $errors,"values" => $servicerequest);
+          
+            $session->getFlashBag()->add("formcontent", $invReqDetails);
+           
+
 
             return $app->redirect($app['url_generator']->generate("newWorkOrder"));
         }

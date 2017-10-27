@@ -1,6 +1,6 @@
 {% extends "base.template.twig" %}
 
-{% import "form_elements.html.twig" as form_elements %}
+{% import "form.html.twig" as form %}
 
 {% block title %}
     CURES - Submitt a work order
@@ -34,11 +34,11 @@
             <div class="row">
                 <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                     <div class="alert alert-info">
-                        <h6 text-center">Emergancy? Call (555) 555-5555</h6>
+                        <h6 class="text-center">Emergancy? Call (555) 555-5555</h6>
                     </div>
                 </div>
             </div>
-            {% if form_errors is defined %}
+            {% if formcontent.errors is defined %}
                 <div class="row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <div class="alert alert-danger">
@@ -48,36 +48,42 @@
                 </div> 
             {% endif %}
             <form autocomplete="on" id="reqform" method="post" action="{{ path("newWorkOrder")}} " enctype="multipart/form-data">
-
-
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <div class="autocomplete_jq">
 
-                            {% set fieldId = "prob_type_input" %}
-                            {% set fieldLbl = "Request type:" %}
-                            {% set has_errors = false %}
-                            {% set errors = [] %}
-                            
-                            {% if form_errors.name is defined %}
-                                {% set has_error = true %}
-                                {% set errors = form_errors.name %}
-                            {% endif %}   
+                            {% set fieldAttributes = 
+                                {
+                                    "type" : "input",
+                                    "subtype" : "text",
+                                    "name" : "type",
+                                    "lbl" : "Request type:", 
+                                    "value" : "",
+                                    "placeholder" : "e.g Leak",
+                                    "required" : "required"
+                                }   
+                            %}
 
-                            {{ form_elements.fieldLabel(fieldLbl,fieldId)}}
-                            
-                            {{ form_elements.input('type','',has_errors,'e.g Leak',fieldId) }}
-
-                            {{ form_elements.showError(errors)}}
-
+                            {{ form.field(fieldAttributes,_context) }}
                         </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">     
-                        <label for="prob_loc_input">Location:</label>
                         <div class="autocomplete_jq">
-                            <input type="text" placeholder="Ex. MR 1320" id="req_loc_input" class="form-control" name="location" required>
+                            {% set fieldAttributes = 
+                                {
+                                    "type" : "input",
+                                    "subtype" : "text",
+                                    "name" : "location",
+                                    "lbl" : "Location:", 
+                                    "value" : "",
+                                    "placeholder" : "e.g MR 1320",
+                                    "required" : "required"
+                                }   
+                            %}
+
+                            {{ form.field(fieldAttributes,_context) }}
                         </div>
                     </div>
 
@@ -108,15 +114,19 @@
 
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                        <label for="req_name_input"> Your name:</label>
-                        <input class="form-control" id="req_name_input" name="name" type="text" required>
-                        {% if form_errors.name is defined %}
-                            {% for msg in form_errors.name %}
-                                <div class="alert alert-danger" role="alert">
-                                    {{ msg }}
-                                </div>
-                            {% endfor %}
-                        {% endif %}
+                        {% set fieldAttributes = 
+                                {
+                                    "type" : "input",
+                                    "subtype" : "text",
+                                    "name" : "name",
+                                    "lbl" : "Your name:", 
+                                    "value" : "",
+                                    "placeholder" : "",
+                                    "required" : "required"
+                                }   
+                        %}
+
+                        {{ form.field(fieldAttributes,_context) }}
                     </div>
                 </div>
 
@@ -138,24 +148,36 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                        <label for="req_phone_input"> Phone #:  </label>
-                        <input class="form-control" id="req_phone_input" name="phone" type="phone" required>
-                        <div class="invalid-feedback">
-                            Invalid phone
-                        </div>
+                        {% set fieldAttributes = 
+                                {
+                                    "type" : "input",
+                                    "subtype" : "text",
+                                    "name" : "phone",
+                                    "lbl" : "Phone #:", 
+                                    "value" : "",
+                                    "placeholder" : "",
+                                    "required" : "required"
+                                }   
+                        %}
+
+                        {{ form.field(fieldAttributes,_context) }}
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                        <label for="req_email_input"> E-mail address:  </label>
-                        <input class="form-control is-invalid" id="req_email_input" name="email" type="email" required>
-                        {% if form_errors.email is defined %}
-                            {% for msg in form_errors.email %}
-                                <div class="invalid-feedback">
-                                    {{ msg }}
-                                </div>
-                            {% endfor %}
-                        {% endif %}
+                        {% set fieldAttributes = 
+                                {
+                                    "type" : "input",
+                                    "subtype" : "text",
+                                    "name" : "email",
+                                    "lbl" : "E-mail address:", 
+                                    "value" : "",
+                                    "placeholder" : "",
+                                    "required" : "required"
+                                }   
+                        %}
+
+                        {{ form.field(fieldAttributes,_context) }}
                     </div>
                 </div>
                 <div class="form-check row">
@@ -168,9 +190,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <button type="submit" class="btn btn-primary" id="submit_btn">Submit</button>
@@ -204,7 +223,7 @@
         $(document).ready(function () {
 
 
-            $("#prob_type_input").autocomplete(
+            $("#type_field_widget").autocomplete(
                     {
                         source: "{{ path('getRequestTypes') }}",
                         minLength: 2,
@@ -215,7 +234,7 @@
             );
 
 
-            $("#req_loc_input").autocomplete(
+            $("#location_field_widget").autocomplete(
                     {
                         source: "{{ path('getLocations') }}",
                         minLength: 2
@@ -233,37 +252,8 @@
                     event.preventDefault();
                 }
 
-
-
             });
-
-        {# $("#submit_btn").click(function (event) {
-
-
-
-
-
-             var formdata = $('#workorder_form').serialize();
-
-             $.ajax({
-                 url: '{{ path('addWorkOrder') }}',
-                 type: 'post',
-                 dataType: 'json',
-                 data: formdata,
-                 success: function (data) {
-                     alert("Server says: " + JSON.stringify(data));
-                 },
-                 error: function () {
-                     alert("Error submitting");
-                 }
-             });
-
-
-
-
-         });#}
-
-             });
+        });
 
     </script>
 {% endblock %} 
