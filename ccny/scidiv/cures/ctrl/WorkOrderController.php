@@ -49,10 +49,10 @@ class WorkOrderController {
         $pagevars = [];
 
         /* @var $validationErrors[] */
-        $invReqDetails = $app['session']->getFlashBag()->get('formcontent');
+        $formcontent = $app['session']->getFlashBag()->get('formcontent');
 
-        if( isset($invReqDetails[0])){
-            $pagevars['formcontent'] = $invReqDetails[0];
+        if (isset($formcontent[0])) {
+            $pagevars['formcontent'] = $formcontent[0];
         }
 
         return $app['twig']->render("newworkorder.html.twig", $pagevars);
@@ -63,7 +63,8 @@ class WorkOrderController {
         /* @var $session Session */
         $session = $app['session'];
 
-        $servicerequest = ServiceRequestFactory::createServiceRequest($request);
+        /* @var $servicerequest ServiceRequest */
+        $servicerequest = ServiceRequestFactory::createFromRequest($request);
 
         /* @var $validationErrors ConstraintViolationList */
         $validationErrors = $app['validator']->validate($servicerequest);
@@ -85,16 +86,12 @@ class WorkOrderController {
                 $errors[$field][] = $msg;
             }
 
-            $invReqDetails = array("errors" => $errors,"values" => $servicerequest);
-          
-            $session->getFlashBag()->add("formcontent", $invReqDetails);
-           
+            $invalidRequestDetails = array("errors" => $errors, "values" => $servicerequest->getRawFormValues());
 
+            $session->getFlashBag()->add("formcontent", $invalidRequestDetails);
 
             return $app->redirect($app['url_generator']->generate("newWorkOrder"));
         }
-
-        exit();
 
         //When submission is ok, redirect to done
         return $app->redirect("/confirm");

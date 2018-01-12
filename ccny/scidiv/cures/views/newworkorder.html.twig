@@ -100,15 +100,24 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                        <label>Details:</label>
-                        <textarea rows="4" class="form-control" name="details" required></textarea>
+                        {% set fieldAttributes = 
+                                {
+                                    "type" : "textarea",
+                                    "name" : "details",
+                                    "lbl" : "Details:", 
+                                    "value" : "",
+                                    "required" : "required"
+                                }   
+                        %}
+
+                        {{ form.field(fieldAttributes,_context) }}
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
                         <label for="wo_image" class="button">Attach an image (optional)</label>
-                        <input class="form-control-file show-for-sr" type="file" id="req_image" name="imgfile">
+                        <input class="form-control-file show-for-sr" type="file" id="req_image" name="image" accept=".png, .jpg, .jpeg">
                     </div>
                 </div>
 

@@ -28,6 +28,7 @@ namespace ccny\scidiv\cures\model;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Description of ServiceRequest
@@ -36,14 +37,31 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ServiceRequest {
 
+    /** @var string */
     public $type;
+    
+    /** @var string */
     public $location;
+    
+    /** @var int */
     public $urgent;
+    
+    /** @var string */
     public $details;
-    public $file;
+    
+    /** @var UploadedFile | null */
+    public $image;
+    
+    /** @var string */
     public $name;
+    
+    /** @var string */
     public $department;
+    
+    /** @var string */
     public $phone;
+    
+    /** @var string */
     public $email;
 
     public function __construct() {
@@ -66,6 +84,25 @@ class ServiceRequest {
 
         $metadata->addPropertyConstraint('location', new Assert\NotBlank());
         $metadata->addPropertyConstraint('location', new Assert\Length(array('min' => 2)));
+
+        $metadata->addPropertyConstraint('image', new Assert\Image(array('mimeTypes' => "image/jpx")));
+    }
+
+    public function getRawFormValues() {
+        
+        $filename = $this->image instanceof UploadedFile ? $this->image->getClientOriginalName() : null; 
+
+        return array(
+            "type" => $this->type,
+            "location" => $this->location,
+            "urgent" => $this->urgent,
+            "details" => $this->details,
+            "image" => $filename,
+            "name" => $this->name,
+            "department" => $this->department,
+            "phone" => $this->phone,
+            "email" => $this->email
+        );
     }
 
 }

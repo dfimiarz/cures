@@ -7,7 +7,7 @@
         <title>{% block title %}Starter page{% endblock %}</title>
         {% block styles %}
             <link rel="stylesheet" href="{{asset("resources/vendor/twitter-bootstrap/css/bootstrap.css")}}" />
-             <link rel="stylesheet" href="{{asset("resources/cures/css/styles.css")}}" />
+            <link rel="stylesheet" href="{{asset("resources/cures/css/styles.css")}}" />
         {% endblock %}
     </head>
     <body id="home">
@@ -24,9 +24,9 @@
                                 <a href="{{ path('home')}}" class="nav-link">Home</a>
                             </li>
                             {% block dynamicMenuContent %}
-                            <li>
-                                <a href="{{ path('newWorkOrder') }}" class="nav-link">New Request</a>
-                            </li>
+                                <li>
+                                    <a href="{{ path('newWorkOrder') }}" class="nav-link">New Request</a>
+                                </li>
                             {% endblock dynamicMenuContent %}
                             <li>
                                 <a href="./status" class="nav-link">Request Status</a>

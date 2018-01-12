@@ -6,6 +6,12 @@
             <name>CURES</name>
         </data>
         <libraries xmlns="http://www.netbeans.org/ns/cdnjs-libraries/1">
+            <library name="bulma" version="0.6.2">
+                <file localPath="web/resources/vendor/bulma/css/bulma.css" path="css/bulma.css"/>
+                <file localPath="web/resources/vendor/bulma/css/bulma.css.map" path="css/bulma.css.map"/>
+                <file localPath="web/resources/vendor/bulma/css/bulma.min.css" path="css/bulma.min.css"/>
+                <file localPath="web/resources/vendor/bulma/css/bulma.min.css.map" path="css/bulma.min.css.map"/>
+            </library>
             <library name="jquery" version="3.2.1">
                 <file localPath="web/resources/vendor/jquery/core.js" path="core.js"/>
                 <file localPath="web/resources/vendor/jquery/jquery.js" path="jquery.js"/>
@@ -15,7 +21,7 @@
                 <file localPath="web/resources/vendor/jquery/jquery.slim.min.js" path="jquery.slim.min.js"/>
                 <file localPath="web/resources/vendor/jquery/jquery.slim.min.map" path="jquery.slim.min.map"/>
             </library>
-            <library name="popper.js" version="1.12.5">
+            <library name="popper.js" version="1.13.0">
                 <file localPath="web/resources/vendor/popper.js/esm/popper-utils.js" path="esm/popper-utils.js"/>
                 <file localPath="web/resources/vendor/popper.js/esm/popper-utils.js.map" path="esm/popper-utils.js.map"/>
                 <file localPath="web/resources/vendor/popper.js/esm/popper-utils.min.js" path="esm/popper-utils.min.js"/>
@@ -41,7 +47,7 @@
                 <file localPath="web/resources/vendor/popper.js/umd/popper.min.js" path="umd/popper.min.js"/>
                 <file localPath="web/resources/vendor/popper.js/umd/popper.min.js.map" path="umd/popper.min.js.map"/>
             </library>
-            <library name="twitter-bootstrap" version="4.0.0-beta">
+            <library name="twitter-bootstrap" version="4.0.0-beta.3">
                 <file localPath="web/resources/vendor/twitter-bootstrap/css/bootstrap-grid.css" path="css/bootstrap-grid.css"/>
                 <file localPath="web/resources/vendor/twitter-bootstrap/css/bootstrap-grid.css.map" path="css/bootstrap-grid.css.map"/>
                 <file localPath="web/resources/vendor/twitter-bootstrap/css/bootstrap-grid.min.css" path="css/bootstrap-grid.min.css"/>
@@ -54,12 +60,14 @@
                 <file localPath="web/resources/vendor/twitter-bootstrap/css/bootstrap.css.map" path="css/bootstrap.css.map"/>
                 <file localPath="web/resources/vendor/twitter-bootstrap/css/bootstrap.min.css" path="css/bootstrap.min.css"/>
                 <file localPath="web/resources/vendor/twitter-bootstrap/css/bootstrap.min.css.map" path="css/bootstrap.min.css.map"/>
+                <file localPath="web/resources/vendor/twitter-bootstrap/js/bootstrap.bundle.js" path="js/bootstrap.bundle.js"/>
+                <file localPath="web/resources/vendor/twitter-bootstrap/js/bootstrap.bundle.js.map" path="js/bootstrap.bundle.js.map"/>
+                <file localPath="web/resources/vendor/twitter-bootstrap/js/bootstrap.bundle.min.js" path="js/bootstrap.bundle.min.js"/>
+                <file localPath="web/resources/vendor/twitter-bootstrap/js/bootstrap.bundle.min.js.map" path="js/bootstrap.bundle.min.js.map"/>
                 <file localPath="web/resources/vendor/twitter-bootstrap/js/bootstrap.js" path="js/bootstrap.js"/>
+                <file localPath="web/resources/vendor/twitter-bootstrap/js/bootstrap.js.map" path="js/bootstrap.js.map"/>
                 <file localPath="web/resources/vendor/twitter-bootstrap/js/bootstrap.min.js" path="js/bootstrap.min.js"/>
-            </library>
-            <library name="what-input" version="4.3.1">
-                <file localPath="web/resources/vendor/what-input/what-input.js" path="what-input.js"/>
-                <file localPath="web/resources/vendor/what-input/what-input.min.js" path="what-input.min.js"/>
+                <file localPath="web/resources/vendor/twitter-bootstrap/js/bootstrap.min.js.map" path="js/bootstrap.min.js.map"/>
             </library>
         </libraries>
     </configuration>

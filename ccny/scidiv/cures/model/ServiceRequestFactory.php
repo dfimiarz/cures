@@ -38,18 +38,17 @@ class ServiceRequestFactory {
 
     /**
      * 
-     * @param Request $r
-     * 
-     * 
+     * @param Request $http_req
+     * @return ServiceRequest
      */
-    public static function createServiceRequest(Request $http_req) {
+    public static function createFromRequest(Request $http_req) {
         $servRequest = new ServiceRequest();
         
         $servRequest->type = $http_req->get("type",null);
         $servRequest->location = $http_req->get("location",null);
         $servRequest->urgent = $http_req->get("urgent",null);
         $servRequest->details = $http_req->get("details",null);
-        $servRequest->file = $http_req->files->get("imgfile");
+        $servRequest->image = $http_req->files->get("image");
         
         $servRequest->name = $http_req->get("name",null);
         $servRequest->department = $http_req->get("dept",null);

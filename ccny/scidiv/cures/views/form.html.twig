@@ -5,7 +5,7 @@
         {% set class = class ~ " is-invalid" %}
     {% endif %}
 
-    <input type="{{ type }}" placeholder="{{ placeholder }}" name="{{ name }}" value="{{ value|e }}" class="{{ class }}" id="{{ id }}" {{ required|default('') }} />
+    <input type="{{ type }}" placeholder="{{ placeholder }}" name="{{ name }}" value="{{ value|escape('html_attr') }}" class="{{ class }}" id="{{ id }}" {{ required|default('') }} />
 
 {% endmacro %}
 
@@ -16,8 +16,18 @@
         {% set class = class ~ " is-invalid" %}
     {% endif %}
 
-    <textarea rows="{{ rows|default("4") }}" placeholder="{{ placeholder }}" name="{{ name }}" value="{{ value|e }}" class="{{ class }}" id="{{ id }}" {{ required|default('') }} />
+    <textarea rows="{{ rows|default("4") }}" placeholder="{{ placeholder }}" name="{{ name }}" class="{{ class }}" id="{{ id }}" {{ required|default('') }} />{{ value|e }}</textarea>
 
+{% endmacro %}
+
+{% macro fileInput(name, value, rows, placeholder, id, required, hasErrors ) %}
+    {% set class="form-control-file" %}
+
+    {% if hasErrors == true %}
+        {% set class = class ~ " is-invalid" %}
+    {% endif %}
+
+    <input class="{{ class }}" type="file" id="{{ id }}" name="{{ name }}" accept=".png, .jpg, .jpeg">
 {% endmacro %}
 
 {% macro showError(errors) %}
