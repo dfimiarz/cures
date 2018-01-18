@@ -1,41 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{% block title %}Starter page{% endblock %}</title>
         {% block styles %}
-            <link rel="stylesheet" href="{{asset("resources/vendor/twitter-bootstrap/css/bootstrap.css")}}" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+            {#<link rel="stylesheet" href="{{asset("resources/vendor/twitter-bootstrap/css/bootstrap.css")}}" />#}
             <link rel="stylesheet" href="{{asset("resources/cures/css/styles.css")}}" />
         {% endblock %}
     </head>
     <body id="home">
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <div class="container">
-                <a href="./" class="navbar-brand">CCNY CURES</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="http://forum.sci.ccny.cuny.edu">
+                    CCNY CURES
+                </a>
+                <button class="button navbar-burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav ml-auto">
-                        {% block navMenu %}
-                            <li>
-                                <a href="{{ path('home')}}" class="nav-link">Home</a>
-                            </li>
-                            {% block dynamicMenuContent %}
-                                <li>
-                                    <a href="{{ path('newWorkOrder') }}" class="nav-link">New Request</a>
-                                </li>
-                            {% endblock dynamicMenuContent %}
-                            <li>
-                                <a href="./status" class="nav-link">Request Status</a>
-                            </li>
-                            <li>
-                                <a href="#contact" class="nav-link">Contact</a>
-                            </li>
-                        {% endblock navMenu %}
-                    </ul>
+            </div>
+            <div class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="{{ path('home')}}">Home</a>
+                    {% block dynamicMenuContent %}
+                        <a class="navbar-item" href="{{ path('newWorkOrder') }}">New Request</a>
+                    {% endblock dynamicMenuContent %}
+                    <a class="navbar-item" href="./status">Request Status</a>
+                </div>
+                <div class="navbar-item" class="navbar-end">
+                    <a href="#contact" class="nav-link">Contact</a>
                 </div>
             </div>
         </nav>
@@ -43,9 +40,10 @@
             <h1>Hello, world!</h1>
         {% endblock %}
         {% block javascript %}
-            <script src="{{asset("resources/vendor/jquery/jquery.min.js")}}"></script>
+            <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+            {#<script src="{{asset("resources/vendor/jquery/jquery.min.js")}}"></script>
             <script src="{{asset("resources/vendor/popper.js/popper.min.js")}}"></script>
-            <script src="{{asset("resources/vendor/twitter-bootstrap/js/bootstrap.js")}}"></script>
+            <script src="{{asset("resources/vendor/twitter-bootstrap/js/bootstrap.js")}}"></script>#}
         {% endblock %}
     </body>
 </html>
