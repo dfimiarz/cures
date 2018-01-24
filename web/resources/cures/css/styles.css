@@ -30,8 +30,8 @@ canvas {
   width: 100%;
 }
 body {
-  background-color: #565a5c;
-  color: #fff;
+  background-color: #white;
+  color: #black;
 }
 .navbar {
   border-bottom: #7D5CC6 3px solid;

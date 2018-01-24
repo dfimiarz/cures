@@ -1,23 +1,24 @@
 {% macro textInput(type,name, value, placeholder, id, required, hasErrors ) %}
-    {% set class="form-control" %}
+    {% set class="input" %}
 
     {% if hasErrors == true %}
         {% set class = class ~ " is-invalid" %}
     {% endif %}
-
-    <input type="{{ type }}" placeholder="{{ placeholder }}" name="{{ name }}" value="{{ value|escape('html_attr') }}" class="{{ class }}" id="{{ id }}" {{ required|default('') }} />
-
+    <div class="control">
+        <input type="{{ type }}" placeholder="{{ placeholder }}" name="{{ name }}" value="{{ value|escape('html_attr') }}" class="{{ class }}" id="{{ id }}" {{ required|default('') }} />
+    </div>
 {% endmacro %}
 
 {% macro textAreaInput(name, value, rows, placeholder, id, required, hasErrors ) %}
-    {% set class="form-control" %}
+    {% set class="textarea" %}
 
     {% if hasErrors == true %}
         {% set class = class ~ " is-invalid" %}
     {% endif %}
 
-    <textarea rows="{{ rows|default("4") }}" placeholder="{{ placeholder }}" name="{{ name }}" class="{{ class }}" id="{{ id }}" {{ required|default('') }} />{{ value|e }}</textarea>
-
+    <div class="control">
+        <textarea rows="{{ rows|default("4") }}" placeholder="{{ placeholder }}" name="{{ name }}" class="{{ class }}" id="{{ id }}" {{ required|default('') }} />{{ value|e }}</textarea>
+    </div>
 {% endmacro %}
 
 {% macro fileInput(name, value, rows, placeholder, id, required, hasErrors ) %}
@@ -35,21 +36,21 @@
     {%if errors is not empty %}
         {% if errors is iterable %}
             {% for msg in errors %}
-                <div class="invalid-feedback">
+                <p class="help is-danger">
                     {{ msg }}
-                </div>
+                </p>
             {% endfor %}
         {% else %}
-            <div class="invalid-feedback">
+            <p class="help is-danger">
                 {{ errors }}
-            </div>    
+            </p>    
         {% endif %}
     {%endif %}
 
 {% endmacro %}
 
 {% macro fieldLabel(msg, target) %}
-    <label for="{{ target }}"> {{ msg }} </label>
+    <label class="label" for="{{ target }}"> {{ msg }} </label>
 {% endmacro %}
 
 
@@ -78,6 +79,8 @@
     {% endif %}
     {#--- END: Initialize attributes ---#}
 
+    <div class="field">
+    
     {{ forms.fieldLabel(lbl,id)}}
 
     {% if type == 'input' %}
@@ -85,8 +88,10 @@
     {% elseif type == 'textarea' %}
         {{ forms.textAreaInput(name, value, 4 , placeholder, id, required, hasErrors) }}
     {% endif %}
-    
+
     {{ forms.showError(errors)}}
+    
+    </div>
 
 {% endmacro %}
 

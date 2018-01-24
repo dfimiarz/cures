@@ -8,7 +8,7 @@
 
 {% block styles %}
     {{parent()}}
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 
     <style>
         #detailed-stats-pannel{
@@ -23,36 +23,58 @@
 {% endblock %}
 
 {% block content %}
-    <section class="main-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                    <h3 class="display-4 py-4 text-center"><strong>New request</strong></h3>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                    <div class="alert alert-info">
-                        <h6 class="text-center">Emergancy? Call (555) 555-5555</h6>
+    <section>
+        <div class="container">
+
+            <div class="hero">
+                <div class="hero-body">
+                    <div class="container">
+                        <h1 class="title">
+                            Add a work request
+                        </h1>
+                        <h2 class="subtitle">
+                            Fill out the form below
+                        </h2>
                     </div>
                 </div>
             </div>
-            {% if formcontent.errors is defined %}
-                <div class="row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                        <div class="alert alert-danger">
-                            <h6 class="text-center">Error submitting request</h6>
+
+
+            <form>
+                <div class="columns">
+                    <div class="column is-10-mobile is-offset-1-mobile is-6-desktop is-offset-3-desktop">
+                        <div class="message is-info">
+                            <div class="message-header">
+                                <p>Info</p>
+                                <button class="delete" aria-label="delete"></button>
+                            </div>
+                            <div class="message-body">
+                                Emergancy? Please call (555) 555-5555
+                            </div>
                         </div>
                     </div>
-                </div> 
-            {% endif %}
-            <form autocomplete="on" id="reqform" method="post" action="{{ path("newWorkOrder")}} " enctype="multipart/form-data">
-                <div class="form-group row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                        <div class="autocomplete_jq">
+                </div>
 
-                            {% set fieldAttributes = 
+                {% if formcontent.errors is defined %}
+                    <div class="columns">
+                        <div class="column is-10-mobile is-offset-1-mobile is-6-desktop is-offset-3-desktop">
+                            <div class="message is-danger">
+                                <div class="message-header">
+                                    <p>Error</p>
+                                    {#<button class="delete" aria-label="delete"></button>#}
+                                </div>
+                                <div class="message-body">
+                                    Error submitting form
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="columns">
+                    <div class="column is-10-mobile is-offset-1-mobile is-6-desktop is-offset-3-desktop">
+                        {% set fieldAttributes = 
                                 {
                                     "type" : "input",
                                     "subtype" : "text",
@@ -62,16 +84,15 @@
                                     "placeholder" : "e.g Leak",
                                     "required" : "required"
                                 }   
-                            %}
+                        %}
 
-                            {{ form.field(fieldAttributes,_context) }}
-                        </div>
+                        {{ form.field(fieldAttributes,_context) }}
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">     
-                        <div class="autocomplete_jq">
-                            {% set fieldAttributes = 
+
+                <div class="columns">
+                    <div class="column is-10-mobile is-offset-1-mobile is-6-desktop is-offset-3-desktop">
+                        {% set fieldAttributes = 
                                 {
                                     "type" : "input",
                                     "subtype" : "text",
@@ -81,15 +102,13 @@
                                     "placeholder" : "e.g MR 1320",
                                     "required" : "required"
                                 }   
-                            %}
+                        %}
 
-                            {{ form.field(fieldAttributes,_context) }}
-                        </div>
+                        {{ form.field(fieldAttributes,_context) }}
                     </div>
-
                 </div>
-                <div class="form-check row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+                <div class="columns">
+                    <div class="column is-10-mobile is-offset-1-mobile is-6-desktop is-offset-3-desktop">
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="urgent">
@@ -98,8 +117,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+                <div class="columns">
+                    <div class="column is-10-mobile is-offset-1-mobile is-6-desktop is-offset-3-desktop">
                         {% set fieldAttributes = 
                                 {
                                     "type" : "textarea",
@@ -113,16 +132,14 @@
                         {{ form.field(fieldAttributes,_context) }}
                     </div>
                 </div>
-
-                <div class="form-group row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                        <label for="wo_image" class="button">Attach an image (optional)</label>
+                <div class="columns">
+                    <div class="column is-10-mobile is-offset-1-mobile is-6-desktop is-offset-3-desktop">
+                        <label for="wo_image">Attach an image (optional)</label>
                         <input class="form-control-file show-for-sr" type="file" id="req_image" name="image" accept=".png, .jpg, .jpeg">
                     </div>
                 </div>
-
-                <div class="form-group row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+                <div class="columns">
+                    <div class="column is-10-mobile is-offset-1-mobile is-6-desktop is-offset-3-desktop">
                         {% set fieldAttributes = 
                                 {
                                     "type" : "input",
@@ -136,11 +153,11 @@
                         %}
 
                         {{ form.field(fieldAttributes,_context) }}
+
                     </div>
                 </div>
-
-                <div class="form-group row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+                <div class="columns">
+                    <div class="column is-10-mobile is-offset-1-mobile is-6-desktop is-offset-3-desktop">
                         <label for="req_dept_sel"> Department:  </label>    
                         <select class="form-control custom-select " id="req_dept_sel" name="dept" required>
                             <option value="biology">Biology</option>
@@ -155,8 +172,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+                <div class="columns">
+                    <div class="column is-10-mobile is-offset-1-mobile is-6-desktop is-offset-3-desktop">
                         {% set fieldAttributes = 
                                 {
                                     "type" : "input",
@@ -172,8 +189,8 @@
                         {{ form.field(fieldAttributes,_context) }}
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+                <div class="columns">
+                    <div class="column is-10-mobile is-offset-1-mobile is-6-desktop is-offset-3-desktop">
                         {% set fieldAttributes = 
                                 {
                                     "type" : "input",
@@ -187,27 +204,27 @@
                         %}
 
                         {{ form.field(fieldAttributes,_context) }}
+
                     </div>
                 </div>
-                <div class="form-check row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="reme">
-                                Remember me
-                            </label>
-                        </div>
+                <div class="columns">
+                    <div class="column is-10-mobile is-offset-1-mobile is-6-desktop is-offset-3-desktop">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="reme">
+                            Remember me
+                        </label>
+
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+                <div class="columns">
+                    <div class="column is-10-mobile is-offset-1-mobile is-6-desktop is-offset-3-desktop">
                         <button type="submit" class="btn btn-primary" id="submit_btn">Submit</button>
                     </div>
                 </div>
-
-            </form>     
+            </form>
         </div>
-    </section>
+    </div>
+</section>
 {% endblock %} 
 
 {% block javascript %}
